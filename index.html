@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AL Ruwai | Industrial Construction Marketplace</title>
+    <style>
+        :root {
+            --primary-color: #ff9900; 
+            --dark-bg: #131921;
+            --light-bg: #eaeded;
+            --text-color: #333;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        header {
+            background-color: var(--dark-bg);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--primary-color); }
+
+        .search-container {
+            display: flex;
+            flex: 1;
+            margin: 0 20px;
+            max-width: 700px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+
+        .search-container button {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .nav-tools {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-item span {
+            display: block;
+            font-size: 12px;
+            color: #ccc;
+        }
+
+        .cart-badge {
+            background-color: var(--primary-color);
+            color: black;
+            border-radius: 50%;
+            padding: 2px 8px;
+            font-size: 12px;
+            margin-left: 5px;
+            font-weight: bold;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1350&q=80') center/cover;
+            height: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 { font-size: 42px; margin-bottom: 12px; }
+
+        .hero .tagline {
+            font-size: 22px;
+            margin-bottom: 25px;
+            direction: rtl;
+            unicode-bidi: embed;
+            color: #f0f0f0;
+        }
+
+        .hero-btn {
+            background-color: var(--primary-color);
+            color: #000;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            margin-bottom: 25px;
+            font-size: 26px;
+            color: #111;
+            font-weight: 700;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 10px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #e2e2e2;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+        }
+
+        .product-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .product-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            min-height: 44px;
+            color: #111;
+        }
+
+        .price-tier {
+            background-color: #f7f7f7;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #B12704;
+            margin-bottom: 15px;
+        }
+
+        .price span { font-size: 12px; color: #666; }
+
+        .view-btn {
+            background-color: #ffd814;
+            border: 1px solid #fcd200;
+            border-radius: 20px;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            color: black;
+            display: block;
+        }
+
+        .view-btn:hover { background-color: #f7ca00; }
+
+        footer {
+            background-color: var(--dark-bg);
+            color: #ddd;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <a href="index.html" class="logo">AL<span>Ruwai</span></a>
+            <div class="search-container">
+                <input type="text" placeholder="Search Industrial Goods...">
+                <button>Search</button>
+            </div>
+            <div class="nav-tools">
+                <a href="#" class="nav-item">
+                    <span>Hello, Sign In</span>
+                    <strong>Procurement</strong>
+                </a>
+                <a href="cart.html" class="nav-item" style="font-size: 16px;">
+                    🛒 <strong>Project Cart</strong><span id="global-cart-count" class="cart-badge">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>شركة أبناء عبدالله الرويعي للمقاولات العامة</h1>
+        <p class="tagline">بناء التميز والثقة 35 عامًا</p>
+        <a href="#marketplace" class="hero-btn">تصفح المخزون بالجملة</a>
+    </section>
+
+    <main id="marketplace">
+        <h2 class="section-title">الأكثر طلبًا</h2>
+        <div class="product-grid">
+            
+            <div class="product-card">
+                <a href="product.html?id=1" class="product-link">
+                    <img src="https://tse3.mm.bing.net/th/id/OIP.in6XQM3W_Vq7qNBO0pEOmgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" class="product-img">
+                    <h3 class="product-title">أنابيب حديد عالية الجودة للتطبيقات الصناعية والإنشائية</h3>
+                    <p class="product-spec">حزمة من الأنابيب المعدنية</p>
+                    <div class="price">85.00 SAR</div>
+                </a>
+                <a href="product.html?id=1" class="view-btn">عرض التفاصيل</a>
+            </div>
+
+            <div class="product-card">
+                <a href="product.html?id=2" class="product-link">
+                    <img src="https://www.ashdownreinforcing.com/wp-content/uploads/concrete-reinforcing-rod-sussex.jpg" class="product-img">
+                    <h3 class="product-title">حديد تسليح عالي المقاومة لمشاريع البناء والخرسانة</h3>
+                    <p class="product-spec">الطول: 5 متر - العرح: 1.2 سم</p>
+                    <div class="price">142.50 SAR</div>
+                </a>
+                <a href="product.html?id=2" class="view-btn">عرض التفاصيل</a>
+            </div>
+
+            <div class="product-card">
+                <a href="product.html?id=3" class="product-link">
+                    <img src="https://media.zid.store/06d55734-3a68-4b8e-a6ab-3a26ea3535be/dd6f5d2b-ebd3-47a3-9e30-36945aa8bcc0.jpg" class="product-img">
+                    <h3 class="product-title">أسمنت بورتلاندي مقاوم للكبريتات عالي الجودة</h3>
+                    <p class="product-spec">وزن الكيس: 50 كجم</p>
+                    <div class="price">50.00 SAR</div>
+                </a>
+                <a href="product.html?id=3" class="view-btn">عرض التفاصيل</a>
+            </div>
+
+            <div class="product-card">
+                <a href="product.html?id=4" class="product-link">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.B6o2IXxbT1h3rV5G-Wah_QHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" class="product-img">
+                    <h3 class="product-title">مصباح السقف ليد الفنار</h3>
+                    <p class="product-spec">المقاس: 7 سم • 7 واط</p>
+                    <div class="price">25.00 SAR</div>
+                </a>
+                <a href="product.html?id=4" class="view-btn">عرض التفاصيل</a>
+            </div>
+
+            <div class="product-card">
+                <a href="product.html?id=5" class="product-link">
+                    <img src="https://images.unsplash.com/photo-1590069261209-f8e9b8642343?auto=format&fit=crop&w=500&q=80" class="product-img">
+                    <h3 class="product-title">بلوك إسمنتي مفرغ قياسي للمباني</h3>
+                    <p class="product-spec">20×20×40 سم</p>
+                    <div class="price">3.50 SAR</div>
+                </a>
+                <a href="product.html?id=5" class="view-btn">عرض التفاصيل</a>
+            </div>
+
+            <div class="product-card">
+                <a href="product.html?id=6" class="product-link">
+                    <img src="https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=500&q=80" class="product-img">
+                    <h3 class="product-title">أسلاك كهربائية نحاسية معزولة - الفنار</h3>
+                    <p class="product-spec">4 ملم • 100 ياردة</p>
+                    <div class="price">185.00 SAR</div>
+                </a>
+                <a href="product.html?id=6" class="view-btn">عرض التفاصيل</a>
+            </div>
+
+            <div class="product-card">
+                <a href="product.html?id=7" class="product-link">
+                    <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=500&q=80" class="product-img">
+                    <h3 class="product-title">قاطع كهربائي رئيسي ثلاثي الأطوار 60 أمبير</h3>
+                    <p class="product-spec">لوحات توزيع الجهد المنخفض</p>
+                    <div class="price">320.00 SAR</div>
+                </a>
+                <a href="product.html?id=7" class="view-btn">عرض التفاصيل</a>
+            </div>
+
+            <div class="product-card">
+                <a href="product.html?id=8" class="product-link">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=500&q=80" class="product-img">
+                    <h3 class="product-title">خوذة سلامة صناعية لحماية الرأس</h3>
+                    <p class="product-spec">المادة: ABS معزز</p>
+                    <div class="price">45.00 SAR</div>
+                </a>
+                <a href="product.html?id=8" class="view-btn">عرض التفاصيل</a>
+            </div>
+
+            <div class="product-card">
+                <a href="product.html?id=9" class="product-link">
+                    <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=500&q=80" class="product-img">
+                    <h3 class="product-title">محبس مياه نحاسي ثقيل للخطوط الرئيسية</h3>
+                    <p class="product-spec">2 بوصة • ضغط عالي</p>
+                    <div class="price">95.00 SAR</div>
+                </a>
+                <a href="product.html?id=9" class="view-btn">عرض التفاصيل</a>
+            </div>
+
+            <div class="product-card">
+                <a href="product.html?id=10" class="product-link">
+                    <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=500&q=80" class="product-img">
+                    <h3 class="product-title">ألواح خشب معاكس (بليود) إندونيسي</h3>
+                    <p class="product-spec">18 ملم • 2.44×1.22 م</p>
+                    <div class="price">135.00 SAR</div>
+                </a>
+                <a href="product.html?id=10" class="view-btn">عرض التفاصيل</a>
+            </div>
+
+            <div class="product-card">
+                <a href="product.html?id=11" class="product-link">
+                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=500&q=80" class="product-img">
+                    <h3 class="product-title">دهان أساس مائي خارجي مقاوم للطقس</h3>
+                    <p class="product-spec">18 لتر • جوتن الاصلي</p>
+                    <div class="price">210.00 SAR</div>
+                </a>
+                <a href="product.html?id=11" class="view-btn">عرض التفاصيل</a>
+            </div>
+
+            <div class="product-card">
+                <a href="product.html?id=12" class="product-link">
+                    <img src="https://images.unsplash.com/photo-1542282088-fe8426682b8f?auto=format&fit=crop&w=500&q=80" class="product-img">
+                    <h3 class="product-title">بحص إنشائي نقي مخلوط للخرسانة</h3>
+                    <p class="product-spec">3/4 بوصة • توريد شاحنة</p>
+                    <div class="price">650.00 SAR</div>
+                </a>
+                <a href="product.html?id=12" class="view-btn">عرض التفاصيل</a>
+            </div>
+
+            <div class="product-card">
+                <a href="product.html?id=13" class="product-link">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=500&q=80" class="product-img">
+                    <h3 class="product-title">بلاط سيراميك أرضيات فرز أول</h3>
+                    <p class="product-spec">60×60 سم • رمادي فاتح</p>
+                    <div class="price">28.00 SAR</div>
+                </a>
+                <a href="product.html?id=13" class="view-btn">عرض التفاصيل</a>
+            </div>
+
+            <div class="product-card">
+                <a href="product.html?id=14" class="product-link">
+                    <img src="https://images.unsplash.com/photo-1534224039826-c7a0dea0e66a?auto=format&fit=crop&w=500&q=80" class="product-img">
+                    <h3 class="product-title">أنابيب نيبرا PVC لتصريف المياه</h3>
+                    <p class="product-spec">4 بوصة • كلاس 4</p>
+                    <div class="price">55.00 SAR</div>
+                </a>
+                <a href="product.html?id=14" class="view-btn">عرض التفاصيل</a>
+            </div>
+
+            <div class="product-card">
+                <a href="product.html?id=15" class="product-link">
+                    <img src="https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?auto=format&fit=crop&w=500&q=80" class="product-img">
+                    <h3 class="product-title">غراء بلاط وسيراميك عالي الالتصاق</h3>
+                    <p class="product-spec">الوزن: 20 كجم</p>
+                    <div class="price">22.00 SAR</div>
+                </a>
+                <a href="product.html?id=15" class="view-btn">عرض التفاصيل</a>
+            </div>
+
+            <div class="product-card">
+                <a href="product.html?id=16" class="product-link">
+                    <img src="https://images.unsplash.com/photo-1508962914676-134849a727f0?auto=format&fit=crop&w=500&q=80" class="product-img">
+                    <h3 class="product-title">شبك حديد أرضيات (مش) لصبة النظافة</h3>
+                    <p class="product-spec">6 ملم • 2×5 متر</p>
+                    <div class="price">110.00 SAR</div>
+                </a>
+                <a href="product.html?id=16" class="view-btn">عرض التفاصيل</a>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        function updateBadge() {
+            let cart = JSON.parse(localStorage.getItem('projectCart')) || [];
+            let totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('global-cart-count').innerText = totalItems;
+        }
+        window.onload = updateBadge;
+    </script>
+</body>
+</html>

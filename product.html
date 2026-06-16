@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Specs | AL Ruwai Marketplace</title>
+    <style>
+        :root {
+            --primary-color: #ff9900;
+            --dark-bg: #131921;
+            --text-color: #111;
+            --amazon-orange: #B12704;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #fff; color: var(--text-color); }
+        header { background-color: var(--dark-bg); color: white; padding: 15px 20px; }
+        .navbar { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: bold; color: white; text-decoration: none; }
+        .logo span { color: var(--primary-color); }
+        .back-link { color: #0066c0; text-decoration: none; font-size: 14px; }
+        
+        .product-container {
+            max-width: 1400px; margin: 20px auto; padding: 20px;
+            display: grid; grid-template-columns: 38% 42% 20%; gap: 30px;
+        }
+
+        @media (max-width: 992px) { .product-container { grid-template-columns: 1fr; } }
+        .image-col { text-align: center; }
+        .main-display-img { max-width: 100%; height: auto; max-height: 420px; object-fit: contain; border: 1px solid #e7e7e7; padding: 10px; }
+        .item-title { font-size: 24px; font-weight: 500; margin-bottom: 10px; }
+        .divider { border-top: 1px solid #e7e7e7; margin: 15px 0; }
+        .amazon-price { color: var(--amazon-orange); font-size: 26px; }
+
+        .spec-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .spec-table td { padding: 12px 6px; font-size: 14px; border-bottom: 1px solid #f3f3f3; }
+        .spec-label { font-weight: 700; color: #555; width: 35%; }
+
+        .buy-box { border: 1px solid #d5d9d9; border-radius: 8px; padding: 20px; background-color: #fff; }
+        .qty-select { padding: 8px; width: 100%; margin: 15px 0; border-radius: 4px; border: 1px solid #d5d9d9; }
+        
+        .action-btn {
+            width: 100%; padding: 12px; border-radius: 25px; cursor: pointer;
+            font-weight: 500; margin-bottom: 10px; border: 1px solid; font-size: 14px;
+        }
+        .cart-btn { background-color: #ffd814; border-color: #fcd200; }
+        .cart-btn:hover { background-color: #f7ca00; }
+        .view-cart-btn { background-color: #fff; border-color: #a8a8a8; text-align: center; display: block; text-decoration: none; color: black; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <a href="index.html" class="logo">AL<span>Ruwai</span></a>
+            <a href="index.html" class="back-link">← Back to Marketplace</a>
+        </div>
+    </header>
+
+    <div class="product-container">
+        <div class="image-col">
+            <img id="product-img" src="" class="main-display-img">
+        </div>
+
+        <div class="info-col">
+            <h1 id="product-title" class="item-title">Loading...</h1>
+            <div class="divider"></div>
+            <div>Price: <span id="product-price" class="amazon-price">--</span></div>
+            <div class="divider"></div>
+            
+            <h3>Technical Product Specifications</h3>
+            <table class="spec-table">
+                <tr><td class="spec-label">Material Class</td><td id="spec-material">--</td></tr>
+                <tr><td class="spec-label">Compliance</td><td id="spec-compliance">--</td></tr>
+                <tr><td class="spec-label">Dispatch Format</td><td id="spec-packaging">--</td></tr>
+            </table>
+        </div>
+
+        <div class="buy-box">
+            <div id="box-price" class="amazon-price" style="font-size: 20px;">--</div>
+            <p style="color: #007600; font-weight: bold; margin-top: 5px;">In Stock</p>
+            
+            <label for="qty" style="font-size: 13px; display:block; margin-top:10px;">Select Quantity:</label>
+            <select id="qty" class="qty-select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="25">25</option>
+            </select>
+
+            <button class="action-btn cart-btn" onclick="addToCart()">Add to Project Cart</button>
+            <a href="cart.html" class="action-btn view-cart-btn">Go to Cart Page ➡️</a>
+        </div>
+    </div>
+
+    <script>
+        const productsDB = {
+            "1": { id: 1, title: "أنابيب حديد عالية الجودة للتطبيقات الصناعية والإنشائية", price: 85.00, img: "https://tse3.mm.bing.net/th/id/OIP.in6XQM3W_Vq7qNBO0pEOmgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3", material: "Galvanized Carbon Steel", compliance: "SASO Approved", packaging: "Industrial Bundled Stack" },
+            "2": { id: 2, title: "حديد تسليح عالي المقاومة لمشاريع البناء والخرسانة", price: 142.50, img: "https://www.ashdownreinforcing.com/wp-content/uploads/concrete-reinforcing-rod-sussex.jpg", material: "High-Tensile Steel Rebar", compliance: "ASTM A615 Grade 60", packaging: "Heavy Freight Bundles" },
+            "3": { id: 3, title: "أسمنت بورتلاندي مقاوم للكبريتات عالي الجودة", price: 50.00, img: "https://media.zid.store/06d55734-3a68-4b8e-a6ab-3a26ea3535be/dd6f5d2b-ebd3-47a3-9e30-36945aa8bcc0.jpg", material: "Sulfate Resistant Portland Type V", compliance: "BS EN 197-1", packaging: "50kg Paper Bags" },
+            "4": { id: 4, title: "مصباح السقف ليد الفنار", price: 25.00, img: "https://tse4.mm.bing.net/th/id/OIP.B6o2IXxbT1h3rV5G-Wah_QHaHa?rs=1&pid=ImgDetMain&o=7&rm=3", material: "Polycarbonate Heat Shell", compliance: "SASO IECEE Certified", packaging: "Single Box Box Package" },
+            "5": { id: 5, title: "بلوك إسمنتي مفرغ قياسي للمباني", price: 3.50, img: "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?auto=format&fit=crop&w=500&q=80", material: "Dense Aggregated Concrete", compliance: "Local Structural Code", packaging: "Palletized Truckload" },
+            "6": { id: 6, title: "أسلاك كهربائية نحاسية معزولة - الفنار", price: 185.00, img: "https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=500&q=80", material: "Pure Copper / PVC Coated", compliance: "IEC 60227 Standards", packaging: "100 Yard Roll Wrapped" },
+            "7": { id: 7, title: "قاطع كهربائي رئيسي ثلاثي الأطوار 60 أمبير", price: 320.00, img: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=500&q=80", material: "Molded Case Heavy Plastic", compliance: "IEC/EN 60947-2", packaging: "Secure Electronic Protective Box" },
+            "8": { id: 8, title: "خوذة سلامة صناعية لحماية الرأس بالموقع", price: 45.00, img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=500&q=80", material: "High Impact ABS Polymer", compliance: "ANSI Z89.1 Type I", packaging: "Individually Polybagged" },
+            "9": { id: 9, title: "محبس مياه نحاسي ثقيل للخطوط الرئيسية", price: 95.00, img: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=500&q=80", material: "Solid Forged Brass body", compliance: "ISO 228 Thread Certified", packaging: "Carton Bulk Box" },
+            "10": { id: 10, title: "ألواح خشب معاكس (بليود) إندونيسي", price: 135.00, img: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=500&q=80", material: "Indonesian Hardwood Ply", compliance: "Phenolic Film Faced Quality", packaging: "Stacked Crated Cargo Flatbed" },
+            "11": { id: 11, title: "دهان أساس مائي خارجي مقاوم للظروف الجوية", price: 210.00, img: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=500&q=80", material: "Acrylic Co-polymer Latex Base", compliance: "Jotun Industrial Grade Approved", packaging: "18 Liter Industrial Plastic Pail" },
+            "12": { id: 12, title: "بحص إنشائي نقي مخلوط للخرسانة", price: 650.00, img: "https://images.unsplash.com/photo-1542282088-fe8426682b8f?auto=format&fit=crop&w=500&q=80", material: "Crushed Limestone Aggregate", compliance: "ASTM C33 Spec Standards", packaging: "Loose Dump Truck Dispatch" },
+            "13": { id: 13, title: "بلاط سيراميك أرضيات فرز أول مقاوم للاحتكاك", price: 28.00, img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=500&q=80", material: "Glazed Hard Ceramic Tile", compliance: "ISO 13006 / SASO Quality", packaging: "Crated Boxed Meters Pallet" },
+            "14": { id: 14, title: "أنابيب نيبرا PVC لتصريف المياه والمجاري", price: 55.00, img: "https://images.unsplash.com/photo-1534224039826-c7a0dea0e66a?auto=format&fit=crop&w=500&q=80", material: "Unplasticized Polyvinyl Chloride", compliance: "DIN 8061/62 Compliant", packaging: "6-Meter Linear Bundles" },
+            "15": { id: 15, title: "غراء بلاط وسيراميك عالي الالتصاق والتحمل", price: 22.00, img: "https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?auto=format&fit=crop&w=500&q=80", material: "Cementitious Adhesive Matrix Blend", compliance: "EN 12004 Class C1", packaging: "20kg Reinforced Sack Bags" },
+            "16": { id: 16, title: "شبك حديد أرضيات (مش) لصبة النظافة", price: 110.00, img: "https://images.unsplash.com/photo-1508962914676-134849a727f0?auto=format&fit=crop&w=500&q=80", material: "Cold-Drawn Welded Steel Wire", compliance: "BS 4483 Structural Quality", packaging: "Flat Welded Mesh Panels Sheet" }
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id') || "1";
+        const currentItem = productsDB[productId];
+
+        // Fill data
+        document.getElementById('product-title').innerText = currentItem.title;
+        document.getElementById('product-price').innerText = currentItem.price.toFixed(2) + " SAR";
+        document.getElementById('box-price').innerText = currentItem.price.toFixed(2) + " SAR";
+        document.getElementById('product-img').src = currentItem.img;
+        document.getElementById('spec-material').innerText = currentItem.material;
+        document.getElementById('spec-compliance').innerText = currentItem.compliance;
+        document.getElementById('spec-packaging').innerText = currentItem.packaging;
+
+        function addToCart() {
+            let selectedQty = parseInt(document.getElementById('qty').value);
+            let cart = JSON.parse(localStorage.getItem('projectCart')) || [];
+            
+            // Check if item is already in cart
+            let existingItem = cart.find(item => item.id === currentItem.id);
+            if (existingItem) {
+                existingItem.qty += selectedQty;
+            } else {
+                cart.push({
+                    id: currentItem.id,
+                    title: currentItem.title,
+                    price: currentItem.price,
+                    img: currentItem.img,
+                    qty: selectedQty
+                });
+            }
+
+            localStorage.setItem('projectCart', JSON.stringify(cart));
+            alert(`Successfully added ${selectedQty} item(s) to your project cart!`);
+        }
+    </script>
+</body>
+</html>

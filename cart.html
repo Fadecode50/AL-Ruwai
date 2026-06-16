@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Project Cart | AL Ruwai</title>
+    <style>
+        :root {
+            --primary-color: #ff9900;
+            --dark-bg: #131921;
+            --light-bg: #f3f3f3;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--light-bg); color: #111; }
+        header { background-color: var(--dark-bg); color: white; padding: 15px 20px; }
+        .navbar { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: bold; color: white; text-decoration: none; }
+        .logo span { color: var(--primary-color); }
+        .market-link { color: #0066c0; text-decoration: none; font-size: 14px; }
+
+        .cart-wrapper { max-width: 1200px; margin: 30px auto; padding: 0 20px; display: grid; grid-template-columns: 75% 25%; gap: 20px; }
+        @media(max-width: 768px) { .cart-wrapper { grid-template-columns: 1fr; } }
+
+        .cart-items-box { background: white; padding: 20px; border-radius: 4px; border: 1px solid #ddd; }
+        .cart-title { border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 20px; font-size: 24px; }
+        
+        .cart-item { display: flex; gap: 20px; padding: 15px 0; border-bottom: 1px solid #eee; align-items: center; }
+        .cart-item-img { width: 100px; height: 100px; object-fit: cover; border-radius: 4px; }
+        .cart-item-details { flex-grow: 1; }
+        .item-name { font-weight: 600; font-size: 16px; margin-bottom: 5px; }
+        .item-price { color: #B12704; font-weight: bold; }
+        
+        .remove-btn { color: #0066c0; cursor: pointer; font-size: 13px; background: none; border: none; text-decoration: underline; margin-top: 5px; }
+        .remove-btn:hover { color: #c45500; }
+
+        .summary-box { background: white; padding: 20px; border-radius: 4px; border: 1px solid #ddd; height: fit-content; }
+        .total-amount { font-size: 20px; font-weight: bold; margin: 15px 0; color: #B12704; }
+        
+        .checkout-btn { background-color: #ffd814; border: 1px solid #fcd200; border-radius: 8px; width: 100%; padding: 12px; font-weight: 500; cursor: pointer; }
+        .checkout-btn:hover { background-color: #f7ca00; }
+        .clear-all { display: block; margin-top: 15px; text-align: center; font-size: 13px; color: red; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <a href="index.html" class="logo">AL<span>Ruwai</span></a>
+            <a href="index.html" class="market-link">← Continue Shopping</a>
+        </div>
+    </header>
+
+    <div class="cart-wrapper">
+        <div class="cart-items-box">
+            <h2 class="cart-title">Project Procurement Cart</h2>
+            <div id="cart-list">
+                </div>
+        </div>
+
+        <div class="summary-box">
+            <h3>Subtotal Overview</h3>
+            <p style="font-size: 14px; color:#555; margin-top:5px;">Total items: <span id="items-count-summary">0</span></p>
+            <div class="total-amount" id="cart-total-price">0.00 SAR</div>
+            <button class="checkout-btn" onclick="alert('Proceeding to corporate checkout framework...')">Proceed to Checkout</button>
+            <span class="clear-all" onclick="clearCart()">Empty Whole Cart</span>
+        </div>
+    </div>
+
+    <script>
+        function renderCart() {
+            let cart = JSON.parse(localStorage.getItem('projectCart')) || [];
+            let listContainer = document.getElementById('cart-list');
+            
+            if (cart.length === 0) {
+                listContainer.innerHTML = `<p style="padding: 20px 0; color:#666;">Your cart is currently empty. Head back to the marketplace to add items.</p>`;
+                document.getElementById('items-count-summary').innerText = "0";
+                document.getElementById('cart-total-price').innerText = "0.00 SAR";
+                return;
+            }
+
+            let htmlContent = "";
+            let grandTotal = 0;
+            let totalUnits = 0;
+
+            cart.forEach((item, index) => {
+                let itemTotal = item.price * item.qty;
+                grandTotal += itemTotal;
+                totalUnits += item.qty;
+
+                htmlContent += `
+                    <div class="cart-item">
+                        <img src="${item.img}" class="cart-item-img">
+                        <div class="cart-item-details">
+                            <div class="item-name">${item.title}</div>
+                            <div style="font-size:14px; color:#555;">Quantity: <strong>${item.qty}</strong></div>
+                            <button class="remove-btn" onclick="removeItem(${index})">Delete item</button>
+                        </div>
+                        <div class="item-price">${itemTotal.toFixed(2)} SAR</div>
+                    </div>
+                `;
+            });
+
+            listContainer.innerHTML = htmlContent;
+            document.getElementById('items-count-summary').innerText = totalUnits;
+            document.getElementById('cart-total-price').innerText = grandTotal.toFixed(2) + " SAR";
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('projectCart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('projectCart', JSON.stringify(cart));
+            renderCart();
+        }
+
+        function clearCart() {
+            if(confirm("Are you sure you want to completely empty your construction cart?")) {
+                localStorage.removeItem('projectCart');
+                renderCart();
+            }
+        }
+
+        window.onload = renderCart;
+    </script>
+</body>
+</html>
